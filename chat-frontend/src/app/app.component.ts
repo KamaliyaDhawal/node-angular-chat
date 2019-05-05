@@ -12,10 +12,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AppComponent {
   title = 'chat-frontend';
   chatForm: FormGroup;
-  htmlStr: string = "";
-  typeStr: string = "";
+  @ViewChild('htmlStr') htmlStr: ElementRef;
+  @ViewChild('typeStr') typeStr: ElementRef;
 
-  @ViewChild('output') output : ElementRef
   constructor( private formBuilder: FormBuilder) {
 
   }
@@ -27,16 +26,14 @@ export class AppComponent {
   	});
 
   	socket.on('chat', (data) => {
-  		this.typeStr = "";
-  		this.htmlStr += `<p><strong>${data.name} </strong> ${data.message}</p>`
+  		this.typeStr.nativeElement.innerHTML = '';
+  		this.htmlStr.nativeElement.innerHTML += `<p><b>${data.name} </b>${data.message}</p>`;
   	});
 
   	socket.on('typing', (data) => {
-  		this.typeStr = `${data.name} is typing....`;
-  	})
+  		this.typeStr.nativeElement.innerHTML += `${data.name} is typing....`;
+  	});
   }
-
-  
 
   send() {
   	let name = this.name.value;

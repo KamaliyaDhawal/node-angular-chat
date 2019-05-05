@@ -1,5 +1,5 @@
-<div [(innerHTML)]="htmlStr"></div>
-<div [(innerHTML)]="typeStr"></div>
+<div #htmlStr></div>
+<div #typeStr></div>
 <form [formGroup]="chatForm">
   Name: <input type="text" name="name" formControlName="name"> <br/>
   Message: <textarea name="message" formControlName="message" (focus)="typingText()"></textarea> <br/>
